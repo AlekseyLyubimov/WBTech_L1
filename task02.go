@@ -7,14 +7,14 @@ import (
 )
 
 func task02() {
-	//task 2:
 	println("")
+	println("Task 2:")
 	numbers := [...]int{2, 4, 6, 8, 10}
 	for _, i := range numbers {
 		go sqrt(i)
 	}
 
-	sleep_time, _ := time.ParseDuration("250ms")
+	sleep_time, _ := time.ParseDuration("200ms")
 	time.Sleep(sleep_time)
 }
 
