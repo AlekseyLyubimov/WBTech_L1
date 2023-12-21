@@ -1,6 +1,6 @@
 package main
 
-func task03() {
+func main() {
 	numbers := []int{2, 4, 6, 8, 10}
 	ch := recurrent_sum_sqr(numbers)
 	println(<-ch)

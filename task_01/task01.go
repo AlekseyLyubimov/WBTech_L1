@@ -4,10 +4,9 @@ import (
 	"fmt"
 )
 
-func task01() {
+func main() {
 	println("Task 1:")
 	Action{Human{name: "Aleksey", age: 31}, "demo action"}.Greetings()
-	pause()
 }
 
 type Human struct {
