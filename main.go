@@ -9,6 +9,7 @@ import (
 func main() {
 	task01()
 	task02()
+	task03()
 }
 
 func pause() {
