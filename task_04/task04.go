@@ -6,23 +6,17 @@ import (
 	"math/rand"
 	"os"
 	"os/signal"
-	"strconv"
 	"sync"
 	"syscall"
 	"time"
 )
 
 func main() {
-	cmd := flag.String("workers", "", "")
+	worker_count := flag.Int("workers", 0, "")
 	flag.Parse()
-	worker_count, err := strconv.Atoi(*cmd)
-    if err != nil {
-        println("Failed to parse worker count")
-        panic(err)
-    }
 
 	channel := make(chan string)
-	for i := 0; i < worker_count; i++ {
+	for i := 0; i < *worker_count; i++ {
 		go read_worker(i, channel)
 	}
 
