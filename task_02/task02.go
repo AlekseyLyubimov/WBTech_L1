@@ -9,7 +9,7 @@ import (
 
 func main() {
 	println("Task 2:")
-	numbers := [...]int{2, 4, 6, 8, 10}
+	numbers := []int{2, 4, 6, 8, 10}
 	wg := &sync.WaitGroup{}
 	wg.Add(len(numbers))
 
