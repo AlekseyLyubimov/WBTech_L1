@@ -1,30 +1,39 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"math/rand"
 	"os"
 	"os/signal"
+	"strconv"
 	"sync"
 	"syscall"
 	"time"
 )
 
 func main() {
+	cmd := flag.String("workers", "", "")
+	flag.Parse()
+	worker_count, err := strconv.Atoi(*cmd)
+    if err != nil {
+        println("Failed to parse worker count")
+        panic(err)
+    }
+
 	channel := make(chan string)
-	rdr_count := 3
-	for i := 0; i < int(rdr_count); i++ {
-		go reader(i, channel)
+	for i := 0; i < worker_count; i++ {
+		go read_worker(i, channel)
 	}
 
 	wg := &sync.WaitGroup{}
 	wg.Add(1)
-	go writer(channel, wg)
+	go write_worker(channel, wg)
 	go interrupter()
 	wg.Wait()
 }
 
-func writer(channel chan string, wg *sync.WaitGroup) {
+func write_worker(channel chan string, wg *sync.WaitGroup) {
 	sleep_time, _ := time.ParseDuration("250ms")
 	
 	for {
@@ -38,7 +47,7 @@ func writer(channel chan string, wg *sync.WaitGroup) {
 	}
 }
 
-func reader(readerID int, channel chan string) {
+func read_worker(readerID int, channel chan string) {
 	for msg := range channel {
         println(fmt.Printf("Reader №%d got message %s\n", readerID, msg))
     }
