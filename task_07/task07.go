@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"math/rand"
 	"sync"
 )
@@ -15,15 +16,19 @@ func main() {
 	wg.Add(3)
 
 	for i := 0; i < 3; i++ {
-		go func(wg *sync.WaitGroup) {
-			for i := 0; i < 100; i++ {
-				m.SyncWriter(rand.Intn(10), rand.Intn(100))
-			}
-			wg.Done()
-		}(&wg)
+		go worker(i, &wg, &m)
 	}
 
 	wg.Wait()
+}
+
+func worker(worker_id int, wg *sync.WaitGroup, syncMap *MapWrapper ) {
+	for j := 0; j < 10; j++ {
+		pos, val := rand.Intn(10), rand.Intn(100)
+		println(fmt.Printf("Worker №%d is writing value %d to position %d\n", worker_id, val, pos))
+		syncMap.SyncWriter(pos, val)
+	}
+	wg.Done()
 }
 
 type MapWrapper struct {
