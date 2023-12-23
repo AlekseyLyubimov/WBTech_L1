@@ -23,7 +23,7 @@ func type_switch(i interface{}) {
 		case bool:
 			println("bool")
 		case chan int:
-			println("chan")
+			println("chan int")
 		default:
 			println("unknown")
 	}
