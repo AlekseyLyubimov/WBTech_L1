@@ -2,12 +2,11 @@ package main
 
 func main() {
 	array := []int{0, 99, 3, 1, 756, 765, 123, 2, 999, 61, 33, 11, 975, 7, 1, 0, 0, 542}
-	array_slice := array[:]
 
-	quickSort(array_slice, 0, len(array)-1)
+	quickSort(array, 0, len(array)-1)
 
 	println("Sorted array: ")
-	for _, val := range array_slice {
+	for _, val := range array {
 		println(val)
 	}
 }
