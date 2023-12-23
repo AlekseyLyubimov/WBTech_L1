@@ -43,7 +43,7 @@ func write_worker(channel chan string, wg *sync.WaitGroup) {
 
 func read_worker(readerID int, channel chan string) {
 	for msg := range channel {
-        println(fmt.Printf("Reader №%d got message %s\n", readerID, msg))
+        fmt.Printf("Reader №%d got message %s\n", readerID, msg)
     }
 }
 

@@ -25,7 +25,7 @@ func main() {
 func worker(worker_id int, wg *sync.WaitGroup, syncMap *MapWrapper ) {
 	for j := 0; j < 10; j++ {
 		pos, val := rand.Intn(10), rand.Intn(100)
-		println(fmt.Printf("Worker №%d is writing value %d to position %d\n", worker_id, val, pos))
+		fmt.Printf("Worker №%d is writing value %d to position %d\n", worker_id, val, pos)
 		syncMap.SyncWriter(pos, val)
 	}
 	wg.Done()
