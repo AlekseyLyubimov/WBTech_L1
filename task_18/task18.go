@@ -12,6 +12,9 @@ func main() {
 	c2 := counter{}
 	wg2 := &sync.WaitGroup{}
 
+	wg1.Add(3)
+	wg2.Add(100)
+
 	for i := 0; i < 3; i++ {
 		go counter_clicker(&c1, 100, wg1)
 	}
@@ -28,12 +31,9 @@ func main() {
 }
 
 func counter_clicker(ctr *counter, count int, wg *sync.WaitGroup) {
-	wg.Add(1)
-
 	for i := 0; i < count; i++ {
 		ctr.Increment()
 	}
-
 	wg.Done()
 }
 
